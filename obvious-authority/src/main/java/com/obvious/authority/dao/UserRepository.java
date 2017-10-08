@@ -11,9 +11,9 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<UserEntity, String> {
 
     @Query("from UserEntity where name = :account and passwd = :passwd")
-    List<UserEntity> findByNamePasswd(@Param(value = "account")String account,
+    UserEntity findByNamePasswd(@Param(value = "account")String account,
                                 @Param(value = "passwd") String passwd);
 
     @Query("from UserEntity where account = :account")
-    List<UserEntity> findByName(@Param(value = "account") String account);
+    UserEntity findByName(@Param(value = "account") String account);
 }

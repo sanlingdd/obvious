@@ -2,6 +2,8 @@ package com.obvious.authority.realm;
 
 import com.obvious.authority.entity.UserEntity;
 import com.obvious.authority.service.UserService;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -10,12 +12,17 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+
 import static com.google.common.base.Preconditions.*;
 
 public class PasswdRealm extends AuthorizingRealm {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Autowired private UserService userService;
+
+    @Getter
+    @Setter
+    private UserService userService;
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(
