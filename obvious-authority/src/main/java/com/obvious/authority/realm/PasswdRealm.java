@@ -3,15 +3,14 @@ package com.obvious.authority.realm;
 import com.obvious.authority.entity.UserEntity;
 import com.obvious.authority.service.UserService;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import static com.google.common.base.Preconditions.*;
 
 public class PasswdRealm extends AuthorizingRealm {
 
@@ -19,7 +18,14 @@ public class PasswdRealm extends AuthorizingRealm {
     @Autowired private UserService userService;
 
     @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+    protected AuthorizationInfo doGetAuthorizationInfo(
+            PrincipalCollection principals) {
+        logger.info("begin to do authorization, session id: " +
+                    SecurityUtils.getSubject().getSession().getId());
+        UserEntity userEntity = (UserEntity) SecurityUtils.getSubject().getPrincipal();
+
+        logger.info("end to do authorization, session id: " +
+                SecurityUtils.getSubject().getSession().getId());
         return null;
     }
 
@@ -32,9 +38,17 @@ public class PasswdRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(
             AuthenticationToken token) throws AuthenticationException {
-        logger.info("begin to authenticate [session id] " +
+        checkNotNull(token);
+        logger.info("begin to authenticate, session id: " +
                     SecurityUtils.getSubject().getSession().getId());
-        UserEntity userEntity = userService
-        return null;
+        UsernamePasswordToken passwdToken = (UsernamePasswordToken) token;
+        UserEntity userEntity = userService.checkUser(passwdToken.getUsername());
+        checkArgument(userEntity != null,
+                    "the account [" + ((UsernamePasswordToken) token).getUsername() + "] not exists.");
+        checkArgument(!userEntity.getPasswd().equals(token.getCredentials()),
+                     "the password not correct.");
+        logger.info("end to authentication, session id: " +
+                    SecurityUtils.getSubject().getSession().getId());
+        return new SimpleAuthenticationInfo(userEntity, userEntity.getAccount(), userEntity.getPasswd());
     }
 }

@@ -22,6 +22,7 @@
         <junit.version>4.12</junit.version>
         <guava.version>23.1-jre</guava.version>
         <rest-assured.version>3.0.3</rest-assured.version>
+        <lombok.version>1.16.18</lombok.version>
     </properties>
 
     <parent>
@@ -36,6 +37,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
 
         <dependency>
             <groupId>com.google.guava</groupId>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/obvious.iml" filepath="$PROJECT_DIR$/obvious.iml" />
+      <module fileurl="file://$PROJECT_DIR$/obvious-authority/obvious-authority.iml" filepath="$PROJECT_DIR$/obvious-authority/obvious-authority.iml" />
+      <module fileurl="file://$PROJECT_DIR$/obvious-common/obvious-common.iml" filepath="$PROJECT_DIR$/obvious-common/obvious-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/obvious-env/obvious-env.iml" filepath="$PROJECT_DIR$/obvious-env/obvious-env.iml" />
+      <module fileurl="file://$PROJECT_DIR$/obvious-gateway/obvious-gateway.iml" filepath="$PROJECT_DIR$/obvious-gateway/obvious-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/obvious-ui/obvious-ui.iml" filepath="$PROJECT_DIR$/obvious-ui/obvious-ui.iml" />
+    </modules>
+  </component>
+</project>

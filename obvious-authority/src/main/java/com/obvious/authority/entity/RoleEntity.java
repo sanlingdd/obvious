@@ -8,27 +8,21 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "ROLE")
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserEntity implements Serializable {
+public class RoleEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "ACCOUNT")
-    private String account;
+    @Column(name = "ROLE_NAME")
+    private String roleName;
 
-    @Column(name = "NAME")
-    private String name;
-
-    @Column(name = "PASSWD")
-    private String passwd;
-
-
-    private Long roleId;
+    @Column(name = "DESCRIPTION")
+    private String description;
 
     @Version
     private Integer version;
