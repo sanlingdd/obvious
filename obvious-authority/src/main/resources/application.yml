@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/authority
+    username: root
+    password: root
+    driverClassName: com.mysql.jdbc.Driver
+
+jpa:
+  database: MYSQL
+  hibernate:
+    ddl-auto: update
+    dialect: org.hibernate.dialect.MySQL5Dialect
+  show-sql: true
