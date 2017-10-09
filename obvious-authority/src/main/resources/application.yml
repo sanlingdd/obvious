@@ -1,7 +1,7 @@
-application:
-  name: obvious-authority
-  port: 8080
 spring:
+  application:
+    name: obvious-authority
+    port: 8080
   datasource:
     url: jdbc:mysql://localhost:3306/authority
     username: root

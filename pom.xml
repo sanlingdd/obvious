@@ -11,6 +11,7 @@
         <module>obvious-ui</module>
         <module>obvious-authority</module>
         <module>obvious-common</module>
+        <module>obvious-core</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -58,7 +59,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>

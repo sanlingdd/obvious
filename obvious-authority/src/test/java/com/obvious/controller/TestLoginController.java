@@ -1,6 +1,7 @@
 package com.obvious.controller;
 
 import com.obvious.App;
+import io.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +18,8 @@ import static io.restassured.RestAssured.given;
 @Import(App.class)
 public class TestLoginController {
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Before
     public void enableApp() {
         App.main(new String[]{});
@@ -24,10 +27,11 @@ public class TestLoginController {
 
     @Test
     public void login() {
-        given().param("username", "meijie")
+        Response response = given().param("username", "meijie")
                 .param("passwd", "123456")
                 .when()
-                .post("/login");
+                .get("/login");
+        logger.info("response: " + response.jsonPath().get().toString());
     }
 
 }
