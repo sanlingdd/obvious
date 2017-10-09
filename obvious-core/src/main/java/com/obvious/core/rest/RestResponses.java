@@ -1,6 +1,19 @@
 package com.obvious.core.rest;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class RestResponses {
+
+    @Autowired
+    @Getter
+    @Setter
+    private RestResponse restResponse;
+
+    public RestResponse buildRestResponseBySpring() {
+        return restResponse;
+    }
 
     /**
      * build default rest response with default value.
@@ -48,12 +61,8 @@ public class RestResponses {
     public static RestResponseHeader buildRestResponseHeader(
             String appName, String usage,
             Integer version, Integer lastStableVersion) {
-        RestResponseHeader header = new RestResponseHeader();
-        header.setAppName(appName);
-        header.setUsage(usage);
-        header.setVersion(version);
-        header.setLastStableVersion(lastStableVersion);
-        return header;
+        return new RestResponseHeader(appName, usage,
+                                      version, lastStableVersion);
     }
 
     /**
