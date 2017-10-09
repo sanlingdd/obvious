@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
@@ -30,10 +31,10 @@ public class PasswdRealm extends AuthorizingRealm {
         logger.info("begin to do authorization, session id: " +
                     SecurityUtils.getSubject().getSession().getId());
         UserEntity userEntity = (UserEntity) SecurityUtils.getSubject().getPrincipal();
-
+        AuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         logger.info("end to do authorization, session id: " +
                 SecurityUtils.getSubject().getSession().getId());
-        return null;
+        return authorizationInfo;
     }
 
     /**
@@ -56,6 +57,6 @@ public class PasswdRealm extends AuthorizingRealm {
                      "the password not correct.");
         logger.info("end to authentication, session id: " +
                     SecurityUtils.getSubject().getSession().getId());
-        return new SimpleAuthenticationInfo(userEntity, userEntity.getAccount(), userEntity.getPasswd());
+        return new SimpleAuthenticationInfo(userEntity, userEntity.getPasswd(), this.getName());
     }
 }
