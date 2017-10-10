@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
@@ -13,15 +11,13 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Component
 public class RestResponseHeader implements Serializable {
 
-    @Value("${spring.application.name:'undefined'}")
-    private String appName;
+    private String appName = "undefined";
 
-    private String usage;
+    private String usage = "no usage info";
 
-    private Integer version;
+    private int version;
 
-    private Integer lastStableVersion;
+    private int lastStableVersion;
 }
