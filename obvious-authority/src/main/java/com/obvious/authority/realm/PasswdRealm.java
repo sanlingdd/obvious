@@ -51,12 +51,12 @@ public class PasswdRealm extends AuthorizingRealm {
                     SecurityUtils.getSubject().getSession().getId());
         UsernamePasswordToken passwdToken = (UsernamePasswordToken) token;
         UserEntity userEntity = userService.checkUser(passwdToken.getUsername());
-        checkArgument(userEntity != null,
-                    "the account [" + ((UsernamePasswordToken) token).getUsername() + "] not exists.");
-        checkArgument(!userEntity.getPasswd().equals(token.getCredentials()),
-                     "the password not correct.");
         logger.info("end to authentication, session id: " +
                     SecurityUtils.getSubject().getSession().getId());
-        return new SimpleAuthenticationInfo(userEntity, userEntity.getPasswd(), this.getName());
+        if (userEntity == null) {
+            throw new AuthenticationException("username and password are not correct");
+        } else {
+            return new SimpleAuthenticationInfo(userEntity, userEntity.getPasswd(), this.getName());
+        }
     }
 }
