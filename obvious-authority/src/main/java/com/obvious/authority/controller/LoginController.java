@@ -1,5 +1,6 @@
 package com.obvious.authority.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.obvious.core.rest.RestResponse;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -19,6 +20,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 public class LoginController {
 
     @RequestMapping("/login")
+    @HystrixCommand(fallbackMethod = "defaultLogin")
     public RestResponse login(
                      @RequestParam(value = "username") String username,
                      @RequestParam(value = "passwd") String passwd) {
@@ -30,9 +32,15 @@ public class LoginController {
             token.setRememberMe(true);
             subject = SecurityUtils.getSubject();
             subject.login(token);
-        } catch (IllegalArgumentException | AuthenticationException e) {
+        } catch (IllegalArgumentException e) {//| AuthenticationException e) {
             return new RestResponse().error(e.getMessage());
         }
         return new RestResponse().data(subject.getPrincipal());
     }
+
+    public RestResponse defaultLogin(String username, String passwd) {
+        return new RestResponse().warn("login service is not available");
+    }
+
+
 }
