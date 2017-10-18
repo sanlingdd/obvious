@@ -19,4 +19,6 @@ public class RestResponseBody implements Serializable{
 
     private Object warn;
 
+    private Object info;
+
 }

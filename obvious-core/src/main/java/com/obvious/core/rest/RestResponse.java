@@ -52,4 +52,9 @@ public class RestResponse implements Serializable {
         this.body.setWarn(warn);
         return this;
     }
+
+    public RestResponse info(Object info) {
+        this.body.setInfo(info);
+        return this;
+    }
 }
