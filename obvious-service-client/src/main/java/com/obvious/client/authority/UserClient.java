@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name = "obvious-authority")
 public interface UserClient {
 
-    @RequestMapping(value = "/authority/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     RestResponse login(@RequestParam(value = "username") String username,
                        @RequestParam(value = "passwd") String passwd);
 }

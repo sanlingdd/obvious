@@ -1,0 +1,7 @@
+---
+applications:
+- name: obvious-authority
+  memory: 512M
+  instances: 1
+  path: target/obvious-authority-1.0-SNAPSHOT.jar
+Main-Class: com.obvious.App

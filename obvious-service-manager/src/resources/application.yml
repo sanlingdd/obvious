@@ -5,9 +5,9 @@ eureka:
   instance:
     hostname: 127.0.0.1
   client:
+    healthcheck:
+      enabled: true
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-
-spring.clound.config.discovery.enabled: true

@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Import;
  *
  */
 @SpringBootApplication
-@EnableZuulProxy
 @Import(ZuulConfig.class)
 public class App
 {

@@ -1,28 +1,28 @@
 package com.obvious.authority.controller;
 
-import com.google.common.base.Throwables;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.obvious.core.rest.RestResponse;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
-import org.hibernate.HibernateException;
-import org.hibernate.exception.JDBCConnectionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
 @RestController
-@RequestMapping("/authority")
 public class LoginController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @RequestMapping("/")
+    public String helloworld() {
+        return "helloworld";
+    }
 
     @RequestMapping("/login")
     @HystrixCommand(fallbackMethod = "defaultLogin")
